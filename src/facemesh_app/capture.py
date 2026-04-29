@@ -5,7 +5,6 @@ Handles mesh data capture, screenshot generation, and test data saving.
 
 import json
 import math
-import shutil
 import time
 from pathlib import Path
 from typing import Optional, Dict, Tuple, List, Any
@@ -46,16 +45,6 @@ YELLOW = (0, 255, 255)
 HUD_BG = (20, 20, 20)
 HUD_BORDER = (230, 230, 230)
 HUD_TEXT = (245, 245, 245)
-
-
-def reset_capture_dir():
-    """Reset capture directory by clearing all contents."""
-    CAPTURE_DIR.mkdir(parents=True, exist_ok=True)
-    for p in CAPTURE_DIR.iterdir():
-        if p.is_dir():
-            shutil.rmtree(p)
-        else:
-            p.unlink()
 
 
 def ms_now():
@@ -109,20 +98,6 @@ def _lm_points_px(
     return points
 
 
-def _draw_points(img, points: List[Tuple[int, int]], color, radius: int = 2) -> None:
-    for p in points:
-        cv2.circle(img, p, radius + 1, WHITE, -1, cv2.LINE_AA)
-        cv2.circle(img, p, radius, color, -1, cv2.LINE_AA)
-
-
-def _draw_ring(img, points: List[Tuple[int, int]], color) -> None:
-    if len(points) < 2:
-        return
-    arr = np.array(points, dtype=np.int32).reshape((-1, 1, 2))
-    cv2.polylines(img, [arr], True, WHITE, 3, cv2.LINE_AA)
-    cv2.polylines(img, [arr], True, color, 1, cv2.LINE_AA)
-
-
 def _center_px(points: List[Tuple[int, int]]) -> Optional[Tuple[int, int]]:
     if not points:
         return None
@@ -130,70 +105,6 @@ def _center_px(points: List[Tuple[int, int]]) -> Optional[Tuple[int, int]]:
     sy = sum(p[1] for p in points)
     n = max(1, len(points))
     return int(round(sx / n)), int(round(sy / n))
-
-
-def _draw_normal_arrow(
-    img, origin: Tuple[int, int], normal: Any, color, length: int
-) -> None:
-    if not isinstance(normal, (list, tuple)) or len(normal) < 3:
-        return
-    nx = safe_float(normal[0], float("nan"))
-    ny = safe_float(normal[1], float("nan"))
-    if not (math.isfinite(nx) and math.isfinite(ny)):
-        return
-    ox, oy = int(origin[0]), int(origin[1])
-    dx = nx * float(length)
-    dy = (-ny) * float(length)
-    raw_len = math.hypot(dx, dy)
-    min_vis = max(10.0, float(length) * 0.35)
-    # Avoid amplifying near-zero jitter into misleading opposite arrows.
-    min_scale_enable = max(1.5, float(length) * 0.06)
-    if raw_len >= min_scale_enable and raw_len < min_vis:
-        s = min_vis / raw_len
-        dx *= s
-        dy *= s
-    ex = int(round(ox + dx))
-    ey = int(round(oy + dy))
-    cv2.arrowedLine(img, (ox, oy), (ex, ey), WHITE, 4, cv2.LINE_AA, tipLength=0.24)
-    cv2.arrowedLine(img, (ox, oy), (ex, ey), color, 2, cv2.LINE_AA, tipLength=0.24)
-
-
-def _draw_fitted_ellipse(img, ellipse_payload: Any, color) -> None:
-    if not isinstance(ellipse_payload, dict):
-        return
-    if not bool(ellipse_payload.get("ok")):
-        return
-    e = ellipse_payload.get("ellipse")
-    if not isinstance(e, dict):
-        return
-    center = e.get("centerPx")
-    axes = e.get("axesPx")
-    angle = e.get("angleDeg")
-    if not isinstance(center, (list, tuple)) or len(center) < 2:
-        return
-    if not isinstance(axes, dict):
-        return
-    if not isinstance(angle, dict):
-        return
-    major = safe_float(axes.get("major"), float("nan"))
-    minor = safe_float(axes.get("minor"), float("nan"))
-    major_angle = safe_float(angle.get("major"), float("nan"))
-    if not (
-        math.isfinite(major) and math.isfinite(minor) and math.isfinite(major_angle)
-    ):
-        return
-    if major <= 1e-6 or minor <= 1e-6:
-        return
-    cx = int(round(safe_float(center[0], 0.0)))
-    cy = int(round(safe_float(center[1], 0.0)))
-    ax = max(1, int(round(major * 0.5)))
-    ay = max(1, int(round(minor * 0.5)))
-    cv2.ellipse(
-        img, (cx, cy), (ax, ay), float(major_angle), 0, 360, WHITE, 3, cv2.LINE_AA
-    )
-    cv2.ellipse(
-        img, (cx, cy), (ax, ay), float(major_angle), 0, 360, color, 1, cv2.LINE_AA
-    )
 
 
 def _build_event_lines(snap_evt: Any, landmarks: List[Any]) -> List[str]:
