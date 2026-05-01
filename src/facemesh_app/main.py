@@ -13,6 +13,7 @@ import cv2
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
 
+from facemesh_app._mediapipe_lazy import apply_lazy_landmarks_patch
 from facemesh_app.calibration import load_calibration
 from facemesh_app.camera_reader import CameraReader
 from facemesh_app.frame_dispatcher import FrameDispatcher, ensure_model, MODEL_PATH
@@ -268,6 +269,8 @@ def main():
     except Exception as e:
         logger.error(f"Failed to download FaceMesh model: {e}")
         raise
+
+    apply_lazy_landmarks_patch()
 
     try:
         base = python.BaseOptions(model_asset_path=str(MODEL_PATH))
