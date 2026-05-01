@@ -1,0 +1,433 @@
+﻿.\.venv\Scripts\python : 220 INFO: PyInstaller: 6.19.0, contrib hooks: 2026.4
+At line:1 char:1
++ .\.venv\Scripts\python -m PyInstaller --noconfirm facemesh.spec *>&1  ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (220 INFO: PyIns...b hooks: 2026.4:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+220 INFO: Python: 3.13.2
+253 INFO: Platform: Windows-11-10.0.26200-SP0
+253 INFO: Python environment: C:\Users\loren\projects\facemesh\.venv
+1077 WARNING: Failed to collect submodules for 'mediapipe.tasks.python.genai.converter' because importing 
+'mediapipe.tasks.python.genai.converter' raised: ImportError: JAX, Torch, and SentencePiece are required for the LLM 
+conversions. Please run `pip install torch jax sensetencepiece`.
+pygame 2.6.1 (SDL 2.28.4, Python 3.13.2)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+6026 INFO: Module search paths (PYTHONPATH):
+['C:\\Users\\loren\\projects\\facemesh',
+ 'C:\\Users\\loren\\AppData\\Local\\Programs\\Python\\Python313\\python313.zip',
+ 'C:\\Users\\loren\\AppData\\Local\\Programs\\Python\\Python313\\DLLs',
+ 'C:\\Users\\loren\\AppData\\Local\\Programs\\Python\\Python313\\Lib',
+ 'C:\\Users\\loren\\AppData\\Local\\Programs\\Python\\Python313',
+ 'C:\\Users\\loren\\projects\\facemesh\\.venv',
+ 'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages',
+ 'C:\\Users\\loren\\projects\\facemesh\\src',
+ 'C:\\Users\\loren\\projects\\facemesh\\src']
+pygame 2.6.1 (SDL 2.28.4, Python 3.13.2)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+6596 INFO: Appending 'binaries' from .spec
+6598 INFO: Appending 'datas' from .spec
+6682 INFO: checking Analysis
+6771 INFO: Building because _input_datas changed
+6771 INFO: Looking for Python shared library...
+6771 INFO: Using Python shared library: C:\Users\loren\AppData\Local\Programs\Python\Python313\python313.dll
+6771 INFO: Running Analysis Analysis-00.toc
+6771 INFO: Target bytecode optimization level: 0
+6771 INFO: Initializing module dependency graph...
+6773 INFO: Initializing module graph hook caches...
+6831 INFO: Analyzing modules for base_library.zip ...
+8587 INFO: Processing standard module hook 'hook-heapq.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+8875 INFO: Processing standard module hook 'hook-encodings.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+13187 INFO: Processing standard module hook 'hook-pickle.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+18059 INFO: Caching module dependency graph...
+18107 INFO: Analyzing C:\Users\loren\projects\facemesh\src\facemesh_app\main.py
+18151 INFO: Processing standard module hook 'hook-cv2.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+19086 INFO: Processing standard module hook 'hook-numpy.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+20381 INFO: Processing standard module hook 'hook-difflib.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+20829 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+21181 INFO: Processing standard module hook 'hook-xml.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+21752 INFO: Processing standard module hook 'hook-_ctypes.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+23823 INFO: Processing standard module hook 'hook-sysconfig.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+24075 INFO: Processing standard module hook 'hook-platform.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+25781 INFO: Processing standard module hook 'hook-psutil.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+28156 INFO: Processing pre-safe-import-module hook 'hook-typing_extensions.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+28159 INFO: SetuptoolsInfo: initializing cached setuptools info...
+31161 INFO: Processing standard module hook 'hook-sounddevice.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+31206 INFO: Processing pre-safe-import-module hook 'hook-tensorflow.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\pre_safe_import_module'
+31722 INFO: Processing standard module hook 'hook-matplotlib.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+32156 INFO: Processing pre-safe-import-module hook 'hook-packaging.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+32377 INFO: Processing pre-safe-import-module hook 'hook-gi.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+32800 INFO: Processing standard module hook 'hook-matplotlib.backend_bases.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+33051 INFO: Processing standard module hook 'hook-PIL.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+33230 INFO: Processing standard module hook 'hook-PIL.Image.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+34008 INFO: Processing standard module hook 'hook-xml.etree.cElementTree.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+34322 INFO: Processing standard module hook 'hook-PIL.ImageFilter.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+36314 INFO: Processing standard module hook 'hook-matplotlib.backends.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+36505 INFO: Processing standard module hook 'hook-matplotlib.pyplot.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+38452 INFO: Processing standard module hook 'hook-dateutil.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+38638 INFO: Processing pre-safe-import-module hook 'hook-six.moves.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+42597 INFO: Processing standard module hook 'hook-scipy.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+43563 INFO: Processing standard module hook 'hook-pytest.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+44041 INFO: Processing standard module hook 'hook-pygments.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+46138 INFO: Processing standard module hook 'hook-py.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+46974 INFO: Processing pre-safe-import-module hook 'hook-tomli.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+49482 INFO: Processing standard module hook 'hook-pycparser.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+50030 INFO: Processing standard module hook 'hook-setuptools.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+50089 INFO: Processing pre-safe-import-module hook 'hook-distutils.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+50195 INFO: Processing pre-safe-import-module hook 'hook-jaraco.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+50195 INFO: Setuptools: 'jaraco' appears to be a full setuptools-vendored copy - creating alias to 
+'setuptools._vendor.jaraco'!
+50231 INFO: Processing pre-safe-import-module hook 'hook-more_itertools.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+50232 INFO: Setuptools: 'more_itertools' appears to be a setuptools-vendored copy - creating alias to 
+'setuptools._vendor.more_itertools'!
+50962 INFO: Processing standard module hook 'hook-setuptools._vendor.jaraco.text.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+50965 INFO: Processing pre-safe-import-module hook 'hook-importlib_resources.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+50987 INFO: Processing pre-safe-import-module hook 'hook-backports.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+50988 INFO: Setuptools: 'backports' appears to be a full setuptools-vendored copy - creating alias to 
+'setuptools._vendor.backports'!
+51386 INFO: Processing pre-safe-import-module hook 'hook-importlib_metadata.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+51387 INFO: Setuptools: 'importlib_metadata' appears to be a setuptools-vendored copy - creating alias to 
+'setuptools._vendor.importlib_metadata'!
+51437 INFO: Processing standard module hook 'hook-setuptools._vendor.importlib_metadata.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+51568 INFO: Processing pre-safe-import-module hook 'hook-zipp.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+51569 INFO: Setuptools: 'zipp' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.zipp'!
+53370 INFO: Processing pre-safe-import-module hook 'hook-wheel.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+53371 INFO: Setuptools: 'wheel' appears to be a setuptools-vendored copy - creating alias to 
+'setuptools._vendor.wheel'!
+54692 INFO: Processing standard module hook 'hook-scipy.linalg.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+56176 INFO: Processing standard module hook 'hook-scipy.special._ufuncs.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+56596 INFO: Processing standard module hook 'hook-scipy.special._ellip_harm_2.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+62724 INFO: Processing standard module hook 'hook-scipy.spatial._ckdtree.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+64173 INFO: Processing standard module hook 'hook-scipy.spatial.transform.rotation.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+66134 INFO: Processing standard module hook 'hook-scipy.stats._stats.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+67262 INFO: Processing standard module hook 'hook-scipy.sparse.csgraph.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+69267 INFO: Processing standard module hook 'hook-pygame.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\pygame\\__pyinstaller'
+70558 INFO: Analyzing hidden import 'mediapipe.tasks.c'
+70567 INFO: Analyzing hidden import 'mediapipe.tasks.python.benchmark'
+70578 INFO: Analyzing hidden import 'mediapipe.tasks.python.benchmark.benchmark_utils'
+70591 INFO: Analyzing hidden import 'mediapipe.tasks.python.benchmark.vision'
+70593 INFO: Analyzing hidden import 'mediapipe.tasks.python.benchmark.vision.benchmark'
+70634 INFO: Analyzing hidden import 'mediapipe.tasks.python.metadata'
+70643 INFO: Analyzing hidden import 'mediapipe.tasks.python.metadata.metadata'
+72053 INFO: Analyzing hidden import 'mediapipe.tasks.python.metadata.metadata_displayer_cli'
+72249 INFO: Processing standard module hook 'hook-xml.dom.domreg.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+72989 INFO: Analyzing hidden import 'mediapipe.tasks.python.metadata.metadata_writers'
+72991 INFO: Analyzing hidden import 'mediapipe.tasks.python.metadata.metadata_writers.image_classifier'
+73104 INFO: Analyzing hidden import 'mediapipe.tasks.python.metadata.metadata_writers.image_segmenter'
+73136 INFO: Analyzing hidden import 'mediapipe.tasks.python.metadata.metadata_writers.model_asset_bundle_utils'
+73150 INFO: Analyzing hidden import 'mediapipe.tasks.python.metadata.metadata_writers.object_detector'
+73217 INFO: Analyzing hidden import 'mediapipe.tasks.python.metadata.metadata_writers.text_classifier'
+73234 INFO: Analyzing hidden import 'mediapipe.tasks.python.test'
+73236 INFO: Analyzing hidden import 'mediapipe.tasks.python.test.audio'
+73238 INFO: Analyzing hidden import 'mediapipe.tasks.python.test.audio.audio_classifier_test'
+73516 INFO: Processing standard module hook 'hook-scipy.io.matlab.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+74178 INFO: Analyzing hidden import 'mediapipe.tasks.python.test.text'
+74180 INFO: Analyzing hidden import 'mediapipe.tasks.python.test.text.language_detector_test'
+74200 INFO: Analyzing hidden import 'mediapipe.tasks.python.test.text.text_classifier_test'
+74224 INFO: Analyzing hidden import 'mediapipe.tasks.python.test.text.text_embedder_test'
+74236 INFO: Analyzing hidden import 'mediapipe.tasks.python.test.vision'
+74238 INFO: Analyzing hidden import 'mediapipe.tasks.python.test.vision.face_detector_test'
+74293 INFO: Analyzing hidden import 'mediapipe.tasks.python.test.vision.face_landmarker_test'
+74331 INFO: Analyzing hidden import 'mediapipe.tasks.python.test.vision.hand_landmarker_test'
+74369 INFO: Analyzing hidden import 'mediapipe.tasks.python.test.vision.holistic_landmarker_test'
+74404 INFO: Analyzing hidden import 'mediapipe.tasks.python.test.vision.image_classifier_test'
+74445 INFO: Analyzing hidden import 'mediapipe.tasks.python.test.vision.image_embedder_test'
+74483 INFO: Analyzing hidden import 'mediapipe.tasks.python.test.vision.image_segmenter_test'
+74518 INFO: Analyzing hidden import 'mediapipe.tasks.python.test.vision.image_test'
+74536 INFO: Analyzing hidden import 'mediapipe.tasks.python.test.vision.interactive_segmenter_test'
+74563 INFO: Analyzing hidden import 'mediapipe.tasks.python.test.vision.object_detector_test'
+74597 INFO: Analyzing hidden import 'mediapipe.tasks.python.test.vision.pose_landmarker_test'
+74628 INFO: Analyzing hidden import 'pygame.__pyinstaller'
+74636 INFO: Analyzing hidden import 'pygame.__pyinstaller.hook-pygame'
+74787 INFO: Processing standard module hook 'hook-win32ctypes.core.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+76937 INFO: Analyzing hidden import 'pygame._camera'
+76938 INFO: Analyzing hidden import 'pygame._camera_opencv'
+76958 INFO: Analyzing hidden import 'pygame._camera_vidcapture'
+77013 INFO: Analyzing hidden import 'pygame._sdl2'
+77067 INFO: Analyzing hidden import 'pygame._sdl2.controller'
+77080 INFO: Analyzing hidden import 'pygame._sdl2.mixer'
+77081 INFO: Analyzing hidden import 'pygame._sdl2.touch'
+77091 INFO: Analyzing hidden import 'pygame._sprite'
+77092 INFO: Analyzing hidden import 'pygame.draw_py'
+77131 INFO: Analyzing hidden import 'pygame.examples.aacircle'
+77154 INFO: Analyzing hidden import 'pygame.examples.aliens'
+77183 INFO: Analyzing hidden import 'pygame.examples.arraydemo'
+77200 INFO: Analyzing hidden import 'pygame.examples.audiocapture'
+77213 INFO: Analyzing hidden import 'pygame.examples.blend_fill'
+77229 INFO: Analyzing hidden import 'pygame.examples.blit_blends'
+77250 INFO: Analyzing hidden import 'pygame.examples.chimp'
+77268 INFO: Analyzing hidden import 'pygame.examples.cursors'
+77288 INFO: Analyzing hidden import 'pygame.examples.dropevent'
+77301 INFO: Analyzing hidden import 'pygame.examples.eventlist'
+77318 INFO: Analyzing hidden import 'pygame.examples.font_viewer'
+77338 INFO: Analyzing hidden import 'pygame.examples.fonty'
+77349 INFO: Analyzing hidden import 'pygame.examples.freetype_misc'
+77376 INFO: Analyzing hidden import 'pygame.examples.glcube'
+77408 INFO: Analyzing hidden import 'pygame.examples.go_over_there'
+77421 INFO: Analyzing hidden import 'pygame.examples.grid'
+77436 INFO: Analyzing hidden import 'pygame.examples.headless_no_windows_needed'
+77447 INFO: Analyzing hidden import 'pygame.examples.joystick'
+77462 INFO: Analyzing hidden import 'pygame.examples.liquid'
+77475 INFO: Analyzing hidden import 'pygame.examples.mask'
+77492 INFO: Analyzing hidden import 'pygame.examples.midi'
+77571 INFO: Analyzing hidden import 'pygame.examples.moveit'
+77588 INFO: Analyzing hidden import 'pygame.examples.music_drop_fade'
+77611 INFO: Analyzing hidden import 'pygame.examples.pixelarray'
+77629 INFO: Analyzing hidden import 'pygame.examples.playmus'
+77646 INFO: Analyzing hidden import 'pygame.examples.resizing_new'
+77658 INFO: Analyzing hidden import 'pygame.examples.scaletest'
+77677 INFO: Analyzing hidden import 'pygame.examples.scrap_clipboard'
+77696 INFO: Analyzing hidden import 'pygame.examples.scroll'
+77720 INFO: Analyzing hidden import 'pygame.examples.setmodescale'
+77733 INFO: Analyzing hidden import 'pygame.examples.sound'
+77744 INFO: Analyzing hidden import 'pygame.examples.sound_array_demos'
+77765 INFO: Analyzing hidden import 'pygame.examples.sprite_texture'
+77783 INFO: Analyzing hidden import 'pygame.examples.stars'
+77800 INFO: Analyzing hidden import 'pygame.examples.testsprite'
+77821 INFO: Analyzing hidden import 'pygame.examples.textinput'
+77846 INFO: Analyzing hidden import 'pygame.examples.vgrade'
+77861 INFO: Analyzing hidden import 'pygame.examples.video'
+77881 INFO: Analyzing hidden import 'pygame.newbuffer'
+77881 INFO: Analyzing hidden import 'pygame.tests'
+78274 INFO: Processing pre-find-module-path hook 'hook-tkinter.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_find_module_path'
+78277 INFO: TclTkInfo: initializing cached Tcl/Tk info...
+79377 INFO: Processing standard module hook 'hook-_tkinter.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+80006 INFO: Analyzing hidden import 'pygame.tests.base_test'
+80145 INFO: Analyzing hidden import 'pygame.tests.blit_test'
+80166 INFO: Analyzing hidden import 'pygame.tests.bufferproxy_test'
+80210 INFO: Analyzing hidden import 'pygame.tests.camera_test'
+80223 INFO: Analyzing hidden import 'pygame.tests.color_test'
+80323 INFO: Analyzing hidden import 'pygame.tests.constants_test'
+80346 INFO: Analyzing hidden import 'pygame.tests.controller_test'
+80373 INFO: Analyzing hidden import 'pygame.tests.cursors_test'
+80393 INFO: Analyzing hidden import 'pygame.tests.display_test'
+80467 INFO: Analyzing hidden import 'pygame.tests.docs_test'
+80496 INFO: Analyzing hidden import 'pygame.tests.draw_test'
+80901 INFO: Analyzing hidden import 'pygame.tests.event_test'
+80969 INFO: Analyzing hidden import 'pygame.tests.font_test'
+81024 INFO: Analyzing hidden import 'pygame.tests.freetype_tags'
+81034 INFO: Analyzing hidden import 'pygame.tests.freetype_test'
+81156 INFO: Analyzing hidden import 'pygame.tests.ftfont_tags'
+81166 INFO: Analyzing hidden import 'pygame.tests.ftfont_test'
+81179 INFO: Analyzing hidden import 'pygame.tests.gfxdraw_test'
+81254 INFO: Analyzing hidden import 'pygame.tests.image__save_gl_surface_test'
+81270 INFO: Analyzing hidden import 'pygame.tests.image_tags'
+81278 INFO: Analyzing hidden import 'pygame.tests.image_test'
+81517 INFO: Analyzing hidden import 'pygame.tests.imageext_tags'
+81527 INFO: Analyzing hidden import 'pygame.tests.imageext_test'
+81545 INFO: Analyzing hidden import 'pygame.tests.joystick_test'
+81564 INFO: Analyzing hidden import 'pygame.tests.key_test'
+81588 INFO: Analyzing hidden import 'pygame.tests.locals_test'
+81599 INFO: Analyzing hidden import 'pygame.tests.mask_test'
+82011 INFO: Analyzing hidden import 'pygame.tests.math_test'
+82279 INFO: Analyzing hidden import 'pygame.tests.midi_test'
+82319 INFO: Analyzing hidden import 'pygame.tests.mixer_music_tags'
+82328 INFO: Analyzing hidden import 'pygame.tests.mixer_music_test'
+82360 INFO: Analyzing hidden import 'pygame.tests.mixer_tags'
+82368 INFO: Analyzing hidden import 'pygame.tests.mixer_test'
+82469 INFO: Analyzing hidden import 'pygame.tests.mouse_test'
+82502 INFO: Analyzing hidden import 'pygame.tests.pixelarray_test'
+82629 INFO: Analyzing hidden import 'pygame.tests.pixelcopy_test'
+82681 INFO: Analyzing hidden import 'pygame.tests.rect_test'
+82883 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests'
+82890 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.all_ok'
+82892 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.all_ok.fake_2_test'
+82905 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.all_ok.fake_3_test'
+82909 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.all_ok.fake_4_test'
+82913 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.all_ok.fake_5_test'
+82918 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.all_ok.fake_6_test'
+82922 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.all_ok.no_assertions__ret_code_of_1__test'
+82934 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.all_ok.zero_tests_test'
+82948 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.everything'
+82950 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.everything.fake_2_test'
+82955 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.everything.incomplete_todo_test'
+82966 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.everything.magic_tag_test'
+82977 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.everything.sleep_test'
+82987 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.exclude'
+82989 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.exclude.fake_2_test'
+82993 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.exclude.invisible_tag_test'
+83003 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.exclude.magic_tag_test'
+83008 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.failures1'
+83010 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.failures1.fake_2_test'
+83014 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.failures1.fake_3_test'
+83018 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.failures1.fake_4_test'
+83028 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.incomplete'
+83030 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.incomplete.fake_2_test'
+83043 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.incomplete.fake_3_test'
+83049 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.incomplete_todo'
+83051 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.incomplete_todo.fake_2_test'
+83055 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.incomplete_todo.fake_3_test'
+83059 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.infinite_loop'
+83061 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.infinite_loop.fake_1_test'
+83072 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.infinite_loop.fake_2_test'
+83076 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.print_stderr'
+83078 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.print_stderr.fake_2_test'
+83083 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.print_stderr.fake_3_test'
+83096 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.print_stderr.fake_4_test'
+83100 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.print_stdout'
+83102 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.print_stdout.fake_2_test'
+83106 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.print_stdout.fake_3_test'
+83118 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.print_stdout.fake_4_test'
+83123 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.run_tests__test'
+83143 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.timeout'
+83146 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.timeout.fake_2_test'
+83151 INFO: Analyzing hidden import 'pygame.tests.run_tests__tests.timeout.sleep_test'
+83164 INFO: Analyzing hidden import 'pygame.tests.rwobject_test'
+83196 INFO: Analyzing hidden import 'pygame.tests.scrap_tags'
+83207 INFO: Analyzing hidden import 'pygame.tests.scrap_test'
+83236 INFO: Analyzing hidden import 'pygame.tests.sndarray_tags'
+83246 INFO: Analyzing hidden import 'pygame.tests.sndarray_test'
+83274 INFO: Analyzing hidden import 'pygame.tests.sprite_test'
+83382 INFO: Analyzing hidden import 'pygame.tests.surface_test'
+83686 INFO: Analyzing hidden import 'pygame.tests.surfarray_tags'
+83696 INFO: Analyzing hidden import 'pygame.tests.surfarray_test'
+83820 INFO: Analyzing hidden import 'pygame.tests.surflock_test'
+83837 INFO: Analyzing hidden import 'pygame.tests.sysfont_test'
+83852 INFO: Analyzing hidden import 'pygame.tests.test_utils.endian'
+83862 INFO: Analyzing hidden import 'pygame.tests.threads_test'
+83885 INFO: Analyzing hidden import 'pygame.tests.time_test'
+83916 INFO: Analyzing hidden import 'pygame.tests.touch_test'
+83932 INFO: Analyzing hidden import 'pygame.tests.transform_test'
+84013 INFO: Analyzing hidden import 'pygame.tests.version_test'
+84025 INFO: Analyzing hidden import 'pygame.tests.video_test'
+84037 INFO: Analyzing hidden import 'cv2.config'
+84038 INFO: Analyzing hidden import 'cv2.config-3'
+84048 INFO: Analyzing hidden import 'cv2.cv2'
+84048 INFO: Analyzing hidden import 'cv2.data'
+84058 INFO: Analyzing hidden import 'cv2.gapi'
+84087 INFO: Analyzing hidden import 'cv2.load_config_py2'
+84096 INFO: Analyzing hidden import 'cv2.mat_wrapper'
+84098 INFO: Analyzing hidden import 'cv2.misc'
+84115 INFO: Analyzing hidden import 'cv2.typing'
+84125 INFO: Analyzing hidden import 'cv2.utils'
+84135 INFO: Processing module hooks (post-graph stage)...
+84157 WARNING: Hidden import "pycparser.lextab" not found!
+84157 WARNING: Hidden import "pycparser.yacctab" not found!
+84412 INFO: Processing standard module hook 'hook-matplotlib.backends.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+84413 INFO: Matplotlib backend selection method: automatic discovery of used backends
+84960 INFO: Trying determine the default backend as first importable candidate from the list: ['QtAgg', 'Qt5Agg', 
+'Gtk4Agg', 'Gtk3Agg', 'TkAgg', 'WxAgg']
+88055 INFO: Selected matplotlib backends: ['TkAgg']
+89065 INFO: Processing standard module hook 'hook-PIL.SpiderImagePlugin.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+96567 WARNING: Hidden import "scipy.special._cdflib" not found!
+96879 INFO: Processing standard module hook 'hook-_tkinter.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+96926 INFO: Performing binary vs. data reclassification (1967 entries)
+112056 INFO: Looking for ctypes DLLs
+112626 INFO: Analyzing run-time hooks ...
+112635 INFO: Including run-time hook 'pyi_rth_inspect.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+112649 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+112661 INFO: Including run-time hook 'pyi_rth_multiprocessing.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+112674 INFO: Including run-time hook 'pyi_rth_setuptools.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+112686 INFO: Including run-time hook 'pyi_rth__tkinter.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+112697 INFO: Including run-time hook 'pyi_rth_mplconfig.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+112708 INFO: Processing pre-find-module-path hook 'hook-_pyi_rth_utils.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_find_module_path'
+112721 INFO: Processing standard module hook 'hook-_pyi_rth_utils.py' from 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+112875 INFO: Creating base_library.zip...
+112909 INFO: Looking for dynamic libraries
+pygame 2.6.1 (SDL 2.28.4, Python 3.13.2)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+121749 INFO: Extra DLL search directories (AddDllDirectory): 
+['C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\numpy.libs', 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\cv2\\../../x64/vc17/bin', 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\pygame', 
+'C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\scipy.libs']
+121749 INFO: Extra DLL search directories (PATH): 
+['C:\\Users\\loren\\projects\\facemesh\\.venv\\Lib\\site-packages\\cv2\\../../x64/vc17/bin']
+126681 INFO: Warnings written to C:\Users\loren\projects\facemesh\build\facemesh\warn-facemesh.txt
+126930 INFO: Graph cross-reference written to C:\Users\loren\projects\facemesh\build\facemesh\xref-facemesh.html
+127177 INFO: checking PYZ
+127247 INFO: Building because C:\Users\loren\projects\facemesh\src\facemesh_app\camera_reader.py changed
+127247 INFO: Building PYZ (ZlibArchive) C:\Users\loren\projects\facemesh\build\facemesh\PYZ-00.pyz
+129922 INFO: Building PYZ (ZlibArchive) C:\Users\loren\projects\facemesh\build\facemesh\PYZ-00.pyz completed 
+successfully.
+129992 INFO: checking PKG
+130046 INFO: Building because toc changed
+130046 INFO: Building PKG (CArchive) facemesh.pkg
+130130 INFO: Building PKG (CArchive) facemesh.pkg completed successfully.
+130132 INFO: Bootloader 
+C:\Users\loren\projects\facemesh\.venv\Lib\site-packages\PyInstaller\bootloader\Windows-64bit-intel\run.exe
+130133 INFO: checking EXE
+130201 INFO: Rebuilding EXE-00.toc because facemesh.exe missing
+130201 INFO: Building EXE from EXE-00.toc
+130201 INFO: Copying bootloader EXE to C:\Users\loren\projects\facemesh\build\facemesh\facemesh.exe
+130341 INFO: Copying icon to EXE
+130420 INFO: Copying 0 resources to EXE
+130420 INFO: Embedding manifest in EXE
+130489 INFO: Appending PKG archive to EXE
+130710 INFO: Fixing EXE headers
+131213 INFO: Building EXE from EXE-00.toc completed successfully.
+131244 INFO: checking COLLECT
+131244 INFO: Building COLLECT because COLLECT-00.toc is non existent
+131245 INFO: Building COLLECT COLLECT-00.toc
+136764 INFO: Building COLLECT COLLECT-00.toc completed successfully.
+136848 INFO: Build complete! The results are available in: C:\Users\loren\projects\facemesh\dist
+pygame 2.6.1 (SDL 2.28.4, Python 3.13.2)
+Hello from the pygame community. https://www.pygame.org/contribute.html

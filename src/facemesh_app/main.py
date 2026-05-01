@@ -163,7 +163,7 @@ def parse_args():
     parser.add_argument(
         "--camera-fps",
         type=float,
-        default=_env_float("CAMERA_FPS", "60"),
+        default=_env_float("CAMERA_FPS", "30"),
         help="Camera FPS",
     )
     parser.add_argument(

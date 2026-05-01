@@ -34,6 +34,7 @@ class CameraReader:
         self._cap: Optional[cv2.VideoCapture] = None
         self._consecutive_failures = 0
         self.pixel_format: str = "bgr"
+        self.fps: float = 0.0
 
     def _probe_format(self, cap: cv2.VideoCapture, probe_frame: np.ndarray) -> str:
         if probe_frame is None:
@@ -111,6 +112,7 @@ class CameraReader:
         """Open the camera and return info dict."""
         self._cap, info = self._open_camera()
         self.pixel_format = info["pixel_format"]
+        self.fps = float(info.get("fps", 0.0) or 0.0)
         logger.info(
             f"CameraReader: Camera backend={info['backend']} index={info['index']} "
             f"{info['width']}x{info['height']} {info['fps']:.1f}fps pixel_format={self.pixel_format}",

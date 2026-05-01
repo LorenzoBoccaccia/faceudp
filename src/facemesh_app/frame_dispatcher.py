@@ -541,6 +541,13 @@ class FrameDispatcher:
         running = True
         pixel_format = camera_reader.pixel_format
 
+        camera_fps = float(getattr(camera_reader, "fps", 0.0) or 0.0)
+        camera_period_ms = (1000.0 / camera_fps) if camera_fps > 0 else 0.0
+        ewma_read_ms: Optional[float] = None
+        ewma_proc_ms: Optional[float] = None
+        ewma_alpha = 0.1
+        frames_since_log = 0
+
         try:
             if overlay_enabled:
                 overlay_manager = RuntimeOverlayManager(
@@ -556,21 +563,59 @@ class FrameDispatcher:
                 capture_window_manager.initialize()
 
             while running:
+                t_read_start = time.perf_counter()
                 frame, timestamp_ms = camera_reader.read_frame()
+                t_read_ms = (time.perf_counter() - t_read_start) * 1000.0
                 if frame is None:
                     time.sleep(0.001)
                     continue
 
+                t_proc_start = time.perf_counter()
                 evt = self._process_frame(frame, timestamp_ms, pixel_format)
                 calibrated_evt, _ = self._run_pipeline_steps(
                     frame, evt, run_downstream=True
                 )
+                t_proc_ms = (time.perf_counter() - t_proc_start) * 1000.0
+
+                ewma_read_ms = (
+                    t_read_ms
+                    if ewma_read_ms is None
+                    else ewma_alpha * t_read_ms + (1.0 - ewma_alpha) * ewma_read_ms
+                )
+                ewma_proc_ms = (
+                    t_proc_ms
+                    if ewma_proc_ms is None
+                    else ewma_alpha * t_proc_ms + (1.0 - ewma_alpha) * ewma_proc_ms
+                )
+                frames_since_log += 1
+
                 runtime_evt = enrich_runtime_evt(evt, calibrated_evt)
 
                 if not quiet and log_interval > 0:
                     now = time.time()
                     if now - last_log_time >= log_interval:
+                        elapsed = (
+                            now - last_log_time if last_log_time > 0 else log_interval
+                        )
+                        processed_fps = (
+                            frames_since_log / elapsed if elapsed > 0 else 0.0
+                        )
+                        buffering = (
+                            camera_period_ms > 0
+                            and ewma_proc_ms is not None
+                            and ewma_read_ms is not None
+                            and ewma_proc_ms > camera_period_ms
+                            and ewma_read_ms < 0.5 * camera_period_ms
+                        )
+                        logger.info(
+                            f"Pipeline: fps={processed_fps:.1f} "
+                            f"t_read={ewma_read_ms:.1f}ms "
+                            f"t_proc={ewma_proc_ms:.1f}ms "
+                            f"cam_period={camera_period_ms:.1f}ms"
+                            + (" [BUFFERING]" if buffering else "")
+                        )
                         last_log_time = now
+                        frames_since_log = 0
                         if evt is not None and evt.has_face:
                             logger.info(
                                 f"Face detected - landmarks: {evt.landmark_count} "
