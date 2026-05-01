@@ -9,7 +9,6 @@ import logging
 import os
 import sys
 
-import cv2
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
 
@@ -30,24 +29,6 @@ from facemesh_app.state_machine import StateMachine
 logger = logging.getLogger(__name__)
 
 
-def _backend_string_to_int(backend_str: str) -> int:
-    """Convert backend string to cv2 CAP_* constant.
-
-    Args:
-        backend_str: Backend string ('auto', 'msmf', 'dshow', 'any')
-
-    Returns:
-        Corresponding cv2 CAP_* constant (defaults to CAP_ANY)
-    """
-    backend_map = {
-        "auto": cv2.CAP_ANY,
-        "msmf": cv2.CAP_MSMF,
-        "dshow": cv2.CAP_DSHOW,
-        "any": cv2.CAP_ANY,
-    }
-    return backend_map.get(backend_str.lower(), cv2.CAP_ANY)
-
-
 def _env_int(key: str, default: str) -> int:
     raw = os.getenv(key, default)
     try:
@@ -57,17 +38,6 @@ def _env_int(key: str, default: str) -> int:
             f"Environment variable {key}='{raw}' is not a valid integer, using default {default}"
         )
         return int(default)
-
-
-def _env_float(key: str, default: str) -> float:
-    raw = os.getenv(key, default)
-    try:
-        return float(raw)
-    except ValueError:
-        logger.warning(
-            f"Environment variable {key}='{raw}' is not a valid float, using default {default}"
-        )
-        return float(default)
 
 
 def parse_args():
@@ -142,36 +112,6 @@ def parse_args():
         type=int,
         default=_env_int("CAMERA_INDEX", "0"),
         help="Camera device index",
-    )
-    parser.add_argument(
-        "--camera-backend",
-        choices=["auto", "msmf", "dshow", "any"],
-        default=os.getenv("CAMERA_BACKEND", "dshow").lower(),
-        help="Camera backend",
-    )
-    parser.add_argument(
-        "--camera-width",
-        type=int,
-        default=_env_int("CAMERA_WIDTH", "1920"),
-        help="Camera width",
-    )
-    parser.add_argument(
-        "--camera-height",
-        type=int,
-        default=_env_int("CAMERA_HEIGHT", "1080"),
-        help="Camera height",
-    )
-    parser.add_argument(
-        "--camera-fps",
-        type=float,
-        default=_env_float("CAMERA_FPS", "30"),
-        help="Camera FPS",
-    )
-    parser.add_argument(
-        "--camera-fourcc",
-        type=str,
-        default=os.getenv("CAMERA_FOURCC", "MJPG"),
-        help="Camera codec",
     )
 
     parser.add_argument(
@@ -382,14 +322,7 @@ def main():
         overlay_step=overlay_step,
         udp_forward_step=udp_forward_step,
     )
-    camera_reader = CameraReader(
-        args.camera_index,
-        _backend_string_to_int(args.camera_backend),
-        args.camera_fourcc,
-        args.camera_width,
-        args.camera_height,
-        args.camera_fps,
-    )
+    camera_reader = CameraReader(camera_id=args.camera_index)
 
     try:
         frame_dispatcher.start()
@@ -440,7 +373,7 @@ def main():
 def _run_with_yappi():
     import yappi
 
-    yappi.set_clock_type("wall")
+    yappi.set_clock_type(os.getenv("FACEMESH_PROFILE_CLOCK", "cpu"))
     yappi.start(builtins=True)
     try:
         main()

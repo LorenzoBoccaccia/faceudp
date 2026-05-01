@@ -34,14 +34,17 @@ Modes:
 - `--calibration-profile NAME` — named calibration profile (defaults to `default`)
 - `--calibration-samples N` — minimum samples per point (default: 5)
 
-Camera (env vars in parentheses override defaults):
+Camera:
 
-- `--camera-index N` (`CAMERA_INDEX`, default 0)
-- `--camera-backend {auto,msmf,dshow,any}` (`CAMERA_BACKEND`, default `dshow`)
-- `--camera-width W` (`CAMERA_WIDTH`, default 1920)
-- `--camera-height H` (`CAMERA_HEIGHT`, default 1080)
-- `--camera-fps FPS` (`CAMERA_FPS`, default 60)
-- `--camera-fourcc CODEC` (`CAMERA_FOURCC`, default `MJPG`)
+- `--camera-index N` (`CAMERA_INDEX`, default 0) — which device to use
+
+Resolution, fps, fourcc, and backend are no longer user-configurable: the
+mediapipe FaceLandmarker downsamples internally to fixed sizes (128x128
+detector, 256x256 landmarks), so high-resolution capture only inflates
+per-frame buffer copies without improving accuracy. The app probes a fixed
+ladder of (backend, format, size) candidates from cheapest to most expensive
+on startup and accepts the first one that the camera actually delivers
+without hitting the driver's CPU-scaling slow path.
 
 UDP:
 

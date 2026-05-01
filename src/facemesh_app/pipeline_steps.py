@@ -26,6 +26,7 @@ class FaceMeshStep:
     _CONVERT_MAP = {
         "bgr": cv2.COLOR_BGR2RGB,
         "yuyv": cv2.COLOR_YUV2RGB_YUY2,
+        "nv12": cv2.COLOR_YUV2RGB_NV12,
     }
 
     def __init__(self, face_landmarker: vision.FaceLandmarker):
