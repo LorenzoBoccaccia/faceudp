@@ -12,7 +12,11 @@ from scipy.optimize import least_squares, lsq_linear
 from scipy.spatial.transform import Rotation
 
 from .facemesh_dao import FaceMeshEvent, safe_float
-from .gaze_primitives import project_head_angles_to_screen_xy, screen_xy_to_head_angles
+from .gaze_primitives import (
+    _calibrated_screen_geometry,
+    project_head_angles_to_screen_xy,
+    screen_xy_to_head_angles,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -1009,44 +1013,17 @@ def apply_calibration_model(
     if head_z_value <= 1e-9:
         raise ValueError("Head Z position must be positive")
 
-    raw_screen_axis_x = np.array(
-        [
-            safe_float(screen_axis_x_x, 1.0),
-            safe_float(screen_axis_x_y, 0.0),
-            safe_float(screen_axis_x_z, 0.0),
-        ],
-        dtype=float,
+    _, screen_axis_x, screen_axis_y, screen_normal = _calibrated_screen_geometry(
+        safe_float(screen_center_cam_x, 0.0),
+        safe_float(screen_center_cam_y, 0.0),
+        safe_float(screen_center_cam_z, _positive_or(center_zeta, DEFAULT_CENTER_ZETA)),
+        safe_float(screen_axis_x_x, 1.0),
+        safe_float(screen_axis_x_y, 0.0),
+        safe_float(screen_axis_x_z, 0.0),
+        safe_float(screen_axis_y_x, 0.0),
+        safe_float(screen_axis_y_y, 1.0),
+        safe_float(screen_axis_y_z, 0.0),
     )
-    raw_screen_axis_y = np.array(
-        [
-            safe_float(screen_axis_y_x, 0.0),
-            safe_float(screen_axis_y_y, 1.0),
-            safe_float(screen_axis_y_z, 0.0),
-        ],
-        dtype=float,
-    )
-
-    axis_x_norm = float(np.linalg.norm(raw_screen_axis_x))
-    if axis_x_norm <= 1e-9:
-        screen_axis_x = np.array([1.0, 0.0, 0.0], dtype=float)
-    else:
-        screen_axis_x = raw_screen_axis_x / axis_x_norm
-
-    axis_y_ortho = raw_screen_axis_y - float(
-        np.dot(raw_screen_axis_y, screen_axis_x)
-    ) * screen_axis_x
-    axis_y_norm = float(np.linalg.norm(axis_y_ortho))
-    if axis_y_norm <= 1e-9:
-        screen_axis_y = np.array([0.0, 1.0, 0.0], dtype=float)
-    else:
-        screen_axis_y = axis_y_ortho / axis_y_norm
-
-    screen_normal = np.cross(screen_axis_x, screen_axis_y)
-    normal_norm = float(np.linalg.norm(screen_normal))
-    if normal_norm <= 1e-9:
-        screen_normal = np.array([0.0, 0.0, -1.0], dtype=float)
-    else:
-        screen_normal = screen_normal / normal_norm
 
     head_origin = np.array([head_x_value, head_y_value, head_z_value], dtype=float)
     face_origin = np.array(

@@ -3,6 +3,7 @@ Shared gaze primitive projection and rendering utilities.
 """
 
 from dataclasses import dataclass
+import functools
 import math
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
@@ -82,6 +83,9 @@ def _project_to_screen_offsets(
     screen_axis_x: np.ndarray,
     screen_axis_y: np.ndarray,
 ) -> Optional[Tuple[float, float]]:
+    # screen_axis_x / screen_axis_y are guaranteed orthonormal by
+    # `_screen_geometry_from_values` (gram-schmidt + normalize), so the basis
+    # inverse is just the transpose: offsets = [axis_x . d, axis_y . d].
     normal = np.cross(screen_axis_x, screen_axis_y)
     normal_norm = float(np.linalg.norm(normal))
     if normal_norm <= 1e-9:
@@ -93,14 +97,8 @@ def _project_to_screen_offsets(
     if ray_t <= 1e-9:
         return None
     intersection = head_origin + ray_t * direction
-    basis = np.column_stack((screen_axis_x, screen_axis_y))
-    try:
-        offsets, _, _, _ = np.linalg.lstsq(
-            basis, intersection - screen_center, rcond=None
-        )
-    except (np.linalg.LinAlgError, ValueError):
-        return None
-    return float(offsets[0]), float(offsets[1])
+    delta = intersection - screen_center
+    return float(np.dot(screen_axis_x, delta)), float(np.dot(screen_axis_y, delta))
 
 
 def _project_to_screen_offsets_with_t(
@@ -110,6 +108,7 @@ def _project_to_screen_offsets_with_t(
     screen_axis_x: np.ndarray,
     screen_axis_y: np.ndarray,
 ) -> Optional[Tuple[float, float, float]]:
+    # See `_project_to_screen_offsets`: orthonormal basis lets us skip lstsq.
     normal = np.cross(screen_axis_x, screen_axis_y)
     normal_norm = float(np.linalg.norm(normal))
     if normal_norm <= 1e-9:
@@ -121,14 +120,12 @@ def _project_to_screen_offsets_with_t(
     if ray_t <= 1e-9:
         return None
     intersection = head_origin + ray_t * direction
-    basis = np.column_stack((screen_axis_x, screen_axis_y))
-    try:
-        offsets, _, _, _ = np.linalg.lstsq(
-            basis, intersection - screen_center, rcond=None
-        )
-    except (np.linalg.LinAlgError, ValueError):
-        return None
-    return float(offsets[0]), float(offsets[1]), ray_t
+    delta = intersection - screen_center
+    return (
+        float(np.dot(screen_axis_x, delta)),
+        float(np.dot(screen_axis_y, delta)),
+        ray_t,
+    )
 
 
 def _normalize(v: np.ndarray, fallback: np.ndarray) -> np.ndarray:
@@ -163,6 +160,42 @@ def _screen_geometry_from_evt(
     )
 
 
+@functools.lru_cache(maxsize=8)
+def _calibrated_screen_geometry(
+    screen_center_cam_x: float,
+    screen_center_cam_y: float,
+    screen_center_cam_z: float,
+    screen_axis_x_x: float,
+    screen_axis_x_y: float,
+    screen_axis_x_z: float,
+    screen_axis_y_x: float,
+    screen_axis_y_y: float,
+    screen_axis_y_z: float,
+) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    # Calibration constants don't change frame-to-frame; cache the derived
+    # axes/normal so the per-frame call site is a dict lookup.
+    screen_center = np.array(
+        [screen_center_cam_x, screen_center_cam_y, screen_center_cam_z],
+        dtype=float,
+    )
+    raw_x = np.array(
+        [screen_axis_x_x, screen_axis_x_y, screen_axis_x_z], dtype=float
+    )
+    raw_y = np.array(
+        [screen_axis_y_x, screen_axis_y_y, screen_axis_y_z], dtype=float
+    )
+    axis_x = _normalize(raw_x, np.array([1.0, 0.0, 0.0], dtype=float))
+    axis_y_ortho = raw_y - float(np.dot(raw_y, axis_x)) * axis_x
+    axis_y = _normalize(axis_y_ortho, np.array([0.0, 1.0, 0.0], dtype=float))
+    raw_normal = np.cross(axis_x, axis_y)
+    normal = _normalize(raw_normal, np.array([0.0, 0.0, -1.0], dtype=float))
+    # Returned arrays are shared with future callers via the cache; freeze
+    # them so an accidental mutation can't poison every frame after.
+    for arr in (screen_center, axis_x, axis_y, normal):
+        arr.setflags(write=False)
+    return screen_center, axis_x, axis_y, normal
+
+
 def _screen_geometry_from_values(
     *,
     head_x: Any,
@@ -182,10 +215,10 @@ def _screen_geometry_from_values(
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     fit_rmse = _finite_float(screen_fit_rmse)
     center_zeta_f = _positive_or(center_zeta, 1200.0)
-    head_x_f = safe_float(head_x, 0.0)
-    head_y_f = safe_float(head_y, 0.0)
-    head_z_f = _positive_or(head_z, center_zeta_f)
     if fit_rmse is None or fit_rmse < 0.0:
+        head_x_f = safe_float(head_x, 0.0)
+        head_y_f = safe_float(head_y, 0.0)
+        head_z_f = _positive_or(head_z, center_zeta_f)
         depth = _positive_or(head_z_f, center_zeta_f)
         screen_center = np.array([head_x_f, head_y_f, head_z_f - depth], dtype=float)
         return (
@@ -194,33 +227,17 @@ def _screen_geometry_from_values(
             np.array([0.0, 1.0, 0.0], dtype=float),
         )
 
-    screen_center = np.array(
-        [
-            safe_float(screen_center_cam_x, 0.0),
-            safe_float(screen_center_cam_y, 0.0),
-            safe_float(screen_center_cam_z, center_zeta_f),
-        ],
-        dtype=float,
+    screen_center, axis_x, axis_y, _ = _calibrated_screen_geometry(
+        safe_float(screen_center_cam_x, 0.0),
+        safe_float(screen_center_cam_y, 0.0),
+        safe_float(screen_center_cam_z, center_zeta_f),
+        safe_float(screen_axis_x_x, 1.0),
+        safe_float(screen_axis_x_y, 0.0),
+        safe_float(screen_axis_x_z, 0.0),
+        safe_float(screen_axis_y_x, 0.0),
+        safe_float(screen_axis_y_y, 1.0),
+        safe_float(screen_axis_y_z, 0.0),
     )
-    raw_x = np.array(
-        [
-            safe_float(screen_axis_x_x, 1.0),
-            safe_float(screen_axis_x_y, 0.0),
-            safe_float(screen_axis_x_z, 0.0),
-        ],
-        dtype=float,
-    )
-    raw_y = np.array(
-        [
-            safe_float(screen_axis_y_x, 0.0),
-            safe_float(screen_axis_y_y, 1.0),
-            safe_float(screen_axis_y_z, 0.0),
-        ],
-        dtype=float,
-    )
-    axis_x = _normalize(raw_x, np.array([1.0, 0.0, 0.0], dtype=float))
-    axis_y_ortho = raw_y - float(np.dot(raw_y, axis_x)) * axis_x
-    axis_y = _normalize(axis_y_ortho, np.array([0.0, 1.0, 0.0], dtype=float))
     return screen_center, axis_x, axis_y
 
 

@@ -273,7 +273,7 @@ def main():
         base = python.BaseOptions(model_asset_path=str(MODEL_PATH))
         opts = vision.FaceLandmarkerOptions(
             base_options=base,
-            output_face_blendshapes=True,
+            output_face_blendshapes=bool(args.capture),
             output_facial_transformation_matrixes=True,
             running_mode=vision.RunningMode.VIDEO,
             num_faces=1,
