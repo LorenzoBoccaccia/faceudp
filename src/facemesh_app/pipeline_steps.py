@@ -743,10 +743,8 @@ class UDPForwardStep:
             else 0.0
         )
         yaw = float(event.corrected_yaw)
-        # Facemesh derives pitch in an OpenCV +y-DOWN frame where +pitch means
-        # user looking UP. Opentrack's world is +y-UP and its default mapping
-        # treats +pitch as nose-DOWN, so flip the sign at the boundary.
-        pitch = -float(event.corrected_pitch)
+       
+        pitch = float(event.corrected_pitch)
         roll = (
             float(face_event.roll)
             if face_event and face_event.roll is not None
